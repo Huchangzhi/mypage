@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN" dir="ltr">
-<head>
+  <head>
     <meta charset="utf-8">
     <title>快捷启动页</title>
     <link rel="stylesheet" href="beginPageCss1.css" type="text/css">
-     <style>
+      <style>
         #aiInput {
           width: 80%;
           padding: 10px;
@@ -14,81 +13,109 @@
           font-size: 16px;
             
         }
+        #aiOutput {
+            width: 80%;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            position: fixed;
+            bottom: 20px; /* 调整底部距离 */
+            left: 50%;
+            transform: translateX(-50%);
+            max-height: 200px;
+            overflow-y: auto;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+          #aiOutput > div {
+            margin-bottom: 10px; /* 调整每条消息之间的距离 */
+            padding:5px;
+            border-radius:5px;
+          }
+           #aiOutput > div.user {
+            background-color: #e0f7fa;
+            text-align: right;
+          }
+          #aiOutput > div.assistant {
+            background-color: #f0f0f0;
+          }
     </style>
-</head>
-<body>
+       <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  </head>
+  <body>
     <div class="backgroundBox1">
-        <div class="backgroundBox2">
-            <!-- backgroundFormStyle盒子里面放的是整个搜索框 -->
-            <!-- 这里使用Bing搜索引擎。 -->
-            <div id="backgroundFormStyle">
-                <form action="https://www.bing.com/search" method="get" target="_parent" id="searchForm">
-                    <input type="hidden" name="hiddenInput" value="3"/>
-                    <input type="text" name="q" placeholder="搜索框" id="searchInput" autocomplete="off"/>
-                    <input type="submit" value="" id="confirmInput"/>
-                    <!-- 确定按钮简化为一个小圆圈。 -->
-                </form>
-            </div>
-            <!-- AI输入框 -->
-            <div id="backgroundFormStyle" style="margin-top: 20px;">
-                <input type="text" placeholder="AI输入框" id="aiInput" autocomplete="off"/>
-                <button type="button" id="aiSubmitButton" style="display: inline-block; width: 20px; height: 20px; margin-left: 5px; border: none; background: #fff; border-radius: 50%; cursor: pointer;"></button>
-            </div>
-            <div id="aiOutput" style="margin-top: 10px; white-space: pre-wrap;"></div>
-
-            <div class="iconBackBoxAll">
-                <!-- 每一个网站入口包含两个信息，图片和名称。 -->
-                <!-- 在href中填写网站的地址，p标签中填写名字。 -->
-                <!-- 不涉及JavaScript的话，建议使用a标签实现链接。 -->
-                <a class="iconBackBox" href="http://oi.nks.edu.cn:19360/">
-                    <img src="img/nkoj.png" alt="">
-                    <!-- src是图片的地址，alt是图片无法显示时的文字 -->
-                    <div>
-                        <p>NKOJ</p>
-                    </div>
-                </a>
-                <a class="iconBackBox" href="https://vjudge.net/">
-                    <img src="https://vjudge.net/favicon.ico" alt="">
-                    <!-- src是图片的地址，alt是图片无法显示时的文字 -->
-                    <div>
-                        <p>vjudge</p>
-                    </div>
-                </a>
-                <a class="iconBackBox" href="https://luogu.com.cn/">
-                    <img src="https://luogu.com.cn/favicon.ico" alt="">
-                    <!-- src是图片的地址，alt是图片无法显示时的文字 -->
-                    <div>
-                        <p>洛谷</p>
-                    </div>
-                </a>
-                <a class="iconBackBox" href="https://baidu.com/">
-                    <img src="https://www.baidu.com/favicon.ico" alt="">
-                    <!-- src是图片的地址，alt是图片无法显示时的文字 -->
-                    <div>
-                        <p>百度</p>
-                    </div>
-                </a>
-                <a class="iconBackBox" href="https://metaso.cn/">
-                    <img src="https://metaso.cn/favicon.ico" alt="">
-                    <!-- src是图片的地址，alt是图片无法显示时的文字 -->
-                    <div>
-                        <p>秘塔AI搜索</p>
-                    </div>
-                </a>
-                <a class="iconBackBox" href="https://tongyi.aliyun.com/">
-                    <img src="https://img.alicdn.com/imgextra/i1/O1CN01AKUdEM1qP6BQVaYhT_!!6000000005487-2-tps-512-512.png" alt="">
-                    <!-- src是图片的地址，alt是图片无法显示时的文字 -->
-                    <div>
-                        <p>通义千问</p>
-                    </div>
-                </a>
-            </div>
+      <div class="backgroundBox2">
+        <!-- backgroundFormStyle盒子里面放的是整个搜索框 -->
+        <!-- 这里使用Bing搜索引擎。 -->
+        <div id="backgroundFormStyle">
+          <form action="https://www.bing.com/search" method="get" target="_parent" id="searchForm">
+            <input type="hidden" name="hiddenInput" value="3"/>
+            <input type="text" name="q" placeholder="搜索框" id="searchInput" autocomplete="off"/>
+            <input type="submit" value="" id="confirmInput"/>
+            <!-- 确定按钮简化为一个小圆圈。 -->
+          </form>
         </div>
+        <!-- AI输入框 -->
+        <div id="backgroundFormStyle" style="margin-top: 20px;">
+            <input type="text" placeholder="AI输入框" id="aiInput" autocomplete="off"/>
+            <button type="button" id="aiSubmitButton" style="display: inline-block; width: 20px; height: 20px; margin-left: 5px; border: none; background: #fff; border-radius: 50%; cursor: pointer;"></button>
+        </div>
+
+        <div class="iconBackBoxAll">
+          <!-- 每一个网站入口包含两个信息，图片和名称。 -->
+          <!-- 在href中填写网站的地址，p标签中填写名字。 -->
+          <!-- 不涉及JavaScript的话，建议使用a标签实现链接。 -->
+          <a class="iconBackBox" href="http://oi.nks.edu.cn:19360/">
+            <img src="img/nkoj.png" alt="">
+            <!-- src是图片的地址，alt是图片无法显示时的文字 -->
+            <div>
+              <p>NKOJ</p>
+            </div>
+          </a>
+          <a class="iconBackBox" href="https://vjudge.net/">
+            <img src="https://vjudge.net/favicon.ico" alt="">
+            <!-- src是图片的地址，alt是图片无法显示时的文字 -->
+            <div>
+              <p>vjudge</p>
+            </div>
+          </a>
+          <a class="iconBackBox" href="https://luogu.com.cn/">
+            <img src="https://luogu.com.cn/favicon.ico" alt="">
+            <!-- src是图片的地址，alt是图片无法显示时的文字 -->
+            <div>
+              <p>洛谷</p>
+            </div>
+          </a>
+          <a class="iconBackBox" href="https://baidu.com/">
+            <img src="https://www.baidu.com/favicon.ico" alt="">
+            <!-- src是图片的地址，alt是图片无法显示时的文字 -->
+            <div>
+              <p>百度</p>
+            </div>
+          </a>
+          <a class="iconBackBox" href="https://metaso.cn/">
+            <img src="https://metaso.cn/favicon.ico" alt="">
+            <!-- src是图片的地址，alt是图片无法显示时的文字 -->
+            <div>
+              <p>秘塔AI搜索</p>
+            </div>
+          </a>
+          <a class="iconBackBox" href="https://tongyi.aliyun.com/">
+            <img src="https://img.alicdn.com/imgextra/i1/O1CN01AKUdEM1qP6BQVaYhT_!!6000000005487-2-tps-512-512.png" alt="">
+            <!-- src是图片的地址，alt是图片无法显示时的文字 -->
+            <div>
+              <p>通义千问</p>
+            </div>
+          </a>
+        </div>
+         <div id="aiOutput" style="white-space: pre-wrap;"></div>
+      </div>
     </div>
     <!-- 下面是添加和删除的按钮，这里暂未实现功能，先放这里配个像。不想要可以删除 -->
     <!-- <div class="setButtonBox">
-        <button type="button" name="button" autocomplete="off" id="addBut"></button>
-        <button type="button" name="button" autocomplete="off" id="deleteBut"></button>
+      <button type="button" name="button" autocomplete="off" id="addBut"></button>
+      <button type="button" name="button" autocomplete="off" id="deleteBut"></button>
     </div> -->
     <script>
         const aiInput = document.getElementById('aiInput');
@@ -100,7 +127,9 @@
           aiOutput.innerHTML = '';
           conversationHistory.forEach(message => {
              const messageDiv = document.createElement('div');
-             messageDiv.textContent = `${message.role === 'user' ? '用户' : 'AI'}: ${message.content}`;
+              messageDiv.classList.add(message.role)
+            
+             messageDiv.innerHTML =  marked.parse(message.content);
               aiOutput.appendChild(messageDiv);
            });
          }
@@ -114,6 +143,7 @@
 
             try {
                aiOutput.innerText = "正在思考中......";
+                aiSubmitButton.disabled = true;
 
                 // 添加用户消息到历史记录
                 conversationHistory.push({ role: 'user', content: input });
@@ -133,19 +163,20 @@
                  if (!response.ok) {
                     const errorText = await response.text();
                     aiOutput.innerText = `Error: ${response.status} - ${errorText}`;
+                      aiSubmitButton.disabled = false;
                     return;
                 }
 
-
                 const aiResponse = await response.json();
-               // 添加 AI 回复到历史记录
-               conversationHistory.push({ role: 'assistant', content: aiResponse });
+                 // 添加 AI 回复到历史记录
+                conversationHistory.push({ role: 'assistant', content: aiResponse });
 
                 displayMessages();
-
+                aiSubmitButton.disabled = false;
                 aiInput.value = ''; // 清空输入框
             } catch (error) {
                  aiOutput.innerText = "请求出错, 请重试";
+                aiSubmitButton.disabled = false;
                 console.error('Error fetching AI response:', error);
             }
         });
@@ -156,5 +187,5 @@
             }
         });
     </script>
-</body>
+  </body>
 </html>
