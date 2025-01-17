@@ -104,22 +104,44 @@
 
             try {
                aiOutput.innerText = "正在思考中......";
+               
+                // 方法一：使用 response.json() (推荐)
                 const response = await fetch('https://hcz1017.pythonanywhere.com/chatapi', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ input: input,
-                                          system_prompt:'请简洁明了的回答' }),
+                    body: JSON.stringify({ input: input, system_prompt: '请简洁明了的回答' }),
                 });
-               if (!response.ok) {
+
+                if (!response.ok) {
+                      const errorText = await response.text();
+                      aiOutput.innerText = `Error: ${response.status} - ${errorText}`;
+                      return;
+                 }
+                const data = await response.json();
+                aiOutput.innerText = data;
+
+
+               
+                 /*
+                 // 方法二：手动解析 JSON (不推荐)
+                const response = await fetch('https://hcz1017.pythonanywhere.com/chatapi', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ input: input, system_prompt: '请简洁明了的回答' }),
+                });
+                 if (!response.ok) {
                     const errorText = await response.text();
                    aiOutput.innerText = `Error: ${response.status} - ${errorText}`;
                    return;
                  }
-
-                const data = await response.text();
+                const text = await response.text();
+                 const data = JSON.parse(text);
                 aiOutput.innerText = data;
+                */
             } catch (error) {
                  aiOutput.innerText = "请求出错, 请重试";
                 console.error('Error fetching AI response:', error);
