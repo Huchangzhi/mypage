@@ -1,9 +1,17 @@
+
+
 <!DOCTYPE html>
 <html lang="zh-CN" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>快捷启动页</title>
     <link rel="stylesheet" href="beginPageCss1.css" type="text/css">
+    <style>
+       #aiInput{
+           position: relative;
+          
+        }
+    </style>
   </head>
   <body>
     <div class="backgroundBox1">
@@ -18,6 +26,13 @@
             <!-- 确定按钮简化为一个小圆圈。 -->
           </form>
         </div>
+          <!-- AI输入框 -->
+          <div id="backgroundFormStyle" style="margin-top: 20px;">
+            <input type="text" placeholder="AI输入框" id="aiInput" autocomplete="off"/>
+            <button type="button" id="aiSubmitButton" style="display: inline-block; width: 20px; height: 20px; margin-left: 5px; border: none; background: #fff; border-radius: 50%; cursor: pointer;"></button>
+          </div>
+        <div id="aiOutput" style="margin-top: 10px; white-space: pre-wrap;"></div>
+
         <div class="iconBackBoxAll">
           <!-- 每一个网站入口包含两个信息，图片和名称。 -->
           <!-- 在href中填写网站的地址，p标签中填写名字。 -->
@@ -72,6 +87,49 @@
       <button type="button" name="button" autocomplete="off" id="addBut"></button>
       <button type="button" name="button" autocomplete="off" id="deleteBut"></button>
     </div> -->
-    <!-- 以下是JavaScript文件 （还没写）-->
+    <script>
+        const aiInput = document.getElementById('aiInput');
+        const aiOutput = document.getElementById('aiOutput');
+        const aiSubmitButton = document.getElementById('aiSubmitButton');
+
+        aiSubmitButton.addEventListener('click', async function() {
+            const input = aiInput.value;
+
+            if (input.trim() === '') {
+                aiOutput.innerText = '请输入内容';
+                return;
+            }
+
+
+            try {
+              aiOutput.innerText = "正在思考中......";
+                const response = await fetch('https://hcz1017.pythonanywhere.com/chatapi', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ input: input,
+                                          system_prompt:'请简洁明了的回答' }),
+                });
+                 if (!response.ok) {
+                    const errorText = await response.text();
+                    aiOutput.innerText = `Error: ${response.status} - ${errorText}`;
+                     return;
+                 }
+
+                const data = await response.text();
+                aiOutput.innerText = data;
+            } catch (error) {
+                 aiOutput.innerText = "请求出错, 请重试";
+                console.error('Error fetching AI response:', error);
+            }
+        });
+         aiInput.addEventListener('keydown', async function(event) {
+            if (event.key === 'Enter') {
+              event.preventDefault();
+              aiSubmitButton.click();
+            }
+        });
+    </script>
   </body>
 </html>
