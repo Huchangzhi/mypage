@@ -5,14 +5,6 @@
     <title>快捷启动页</title>
     <link rel="stylesheet" href="beginPageCss1.css" type="text/css">
       <style>
-        #aiInput {
-          width: 80%;
-          padding: 10px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          font-size: 16px;
-            
-        }
         #aiOutput {
             width: 80%;
             background-color: #f0f0f0;
@@ -28,18 +20,39 @@
             box-sizing: border-box;
             margin-bottom: 20px;
         }
-          #aiOutput > div {
+         #aiOutput > div {
             margin-bottom: 10px; /* 调整每条消息之间的距离 */
             padding:5px;
             border-radius:5px;
           }
-           #aiOutput > div.user {
+          #aiOutput > div.user {
             background-color: #e0f7fa;
             text-align: right;
           }
           #aiOutput > div.assistant {
             background-color: #f0f0f0;
           }
+          #aiForm {
+             display: flex;
+             justify-content: center;
+            margin-top: 20px;
+          }
+           #aiForm input[type="text"]{
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        #aiForm input[type="submit"] {
+                width: 30px;
+                height: 30px;
+                margin-left: 5px;
+                border: none;
+                background: #ccc;
+                border-radius: 50%;
+                cursor: pointer;
+        }
     </style>
        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   </head>
@@ -56,12 +69,8 @@
             <!-- 确定按钮简化为一个小圆圈。 -->
           </form>
         </div>
-        <!-- AI输入框 -->
-        <div id="backgroundFormStyle" style="margin-top: 20px;">
-            <input type="text" placeholder="AI输入框" id="aiInput" autocomplete="off"/>
-            <button type="button" id="aiSubmitButton" style="display: inline-block; width: 20px; height: 20px; margin-left: 5px; border: none; background: #fff; border-radius: 50%; cursor: pointer;"></button>
-        </div>
-
+        
+        
         <div class="iconBackBoxAll">
           <!-- 每一个网站入口包含两个信息，图片和名称。 -->
           <!-- 在href中填写网站的地址，p标签中填写名字。 -->
@@ -108,8 +117,15 @@
               <p>通义千问</p>
             </div>
           </a>
+          <!-- AI输入框 -->
+          <div id="backgroundFormStyle" >
+              <form id="aiForm">
+                  <input type="text" placeholder="AI输入框" id="aiInput" autocomplete="off"/>
+                  <input type="submit" value="" id="aiSubmitButton" />
+              </form>
+            </div>
         </div>
-         <div id="aiOutput" style="white-space: pre-wrap;"></div>
+        <div id="aiOutput" style="white-space: pre-wrap;"></div>
       </div>
     </div>
     <!-- 下面是添加和删除的按钮，这里暂未实现功能，先放这里配个像。不想要可以删除 -->
@@ -118,9 +134,11 @@
       <button type="button" name="button" autocomplete="off" id="deleteBut"></button>
     </div> -->
     <script>
-        const aiInput = document.getElementById('aiInput');
+      const aiInput = document.getElementById('aiInput');
         const aiOutput = document.getElementById('aiOutput');
         const aiSubmitButton = document.getElementById('aiSubmitButton');
+        const aiForm = document.getElementById('aiForm');
+        
 
         let conversationHistory = [];  // 定义对话历史数组
          function  displayMessages() {
@@ -133,7 +151,8 @@
               aiOutput.appendChild(messageDiv);
            });
          }
-        aiSubmitButton.addEventListener('click', async function() {
+        aiForm.addEventListener('submit', async function(event) {
+             event.preventDefault();
             const input = aiInput.value;
 
             if (input.trim() === '') {
@@ -143,7 +162,8 @@
 
             try {
                aiOutput.innerText = "正在思考中......";
-                aiSubmitButton.disabled = true;
+               aiSubmitButton.disabled = true;
+
 
                 // 添加用户消息到历史记录
                 conversationHistory.push({ role: 'user', content: input });
@@ -163,27 +183,21 @@
                  if (!response.ok) {
                     const errorText = await response.text();
                     aiOutput.innerText = `Error: ${response.status} - ${errorText}`;
-                      aiSubmitButton.disabled = false;
+                     aiSubmitButton.disabled = false;
                     return;
                 }
-
                 const aiResponse = await response.json();
-                 // 添加 AI 回复到历史记录
+
+                // 添加 AI 回复到历史记录
                 conversationHistory.push({ role: 'assistant', content: aiResponse });
 
                 displayMessages();
-                aiSubmitButton.disabled = false;
+                  aiSubmitButton.disabled = false;
                 aiInput.value = ''; // 清空输入框
             } catch (error) {
                  aiOutput.innerText = "请求出错, 请重试";
                 aiSubmitButton.disabled = false;
                 console.error('Error fetching AI response:', error);
-            }
-        });
-          aiInput.addEventListener('keydown', async function(event) {
-            if (event.key === 'Enter') {
-              event.preventDefault();
-              aiSubmitButton.click();
             }
         });
     </script>
