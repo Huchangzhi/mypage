@@ -69,8 +69,15 @@
             <!-- 确定按钮简化为一个小圆圈。 -->
           </form>
         </div>
-        
-        
+        <!-- AI输入框 -->
+        <div id="backgroundFormStyle" >
+            <form id="aiForm">
+                <input type="text" placeholder="AI输入框" id="aiInput" autocomplete="off"/>
+                <input type="submit" value="" id="aiSubmitButton" />
+            </form>
+          </div>
+
+
         <div class="iconBackBoxAll">
           <!-- 每一个网站入口包含两个信息，图片和名称。 -->
           <!-- 在href中填写网站的地址，p标签中填写名字。 -->
@@ -117,13 +124,6 @@
               <p>通义千问</p>
             </div>
           </a>
-          <!-- AI输入框 -->
-          <div id="backgroundFormStyle" >
-              <form id="aiForm">
-                  <input type="text" placeholder="AI输入框" id="aiInput" autocomplete="off"/>
-                  <input type="submit" value="" id="aiSubmitButton" />
-              </form>
-            </div>
         </div>
         <div id="aiOutput" style="white-space: pre-wrap;"></div>
       </div>
@@ -134,11 +134,11 @@
       <button type="button" name="button" autocomplete="off" id="deleteBut"></button>
     </div> -->
     <script>
-      const aiInput = document.getElementById('aiInput');
+        const aiInput = document.getElementById('aiInput');
         const aiOutput = document.getElementById('aiOutput');
         const aiSubmitButton = document.getElementById('aiSubmitButton');
         const aiForm = document.getElementById('aiForm');
-        
+
 
         let conversationHistory = [];  // 定义对话历史数组
          function  displayMessages() {
