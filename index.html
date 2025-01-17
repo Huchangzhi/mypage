@@ -12,7 +12,7 @@
             border-radius: 5px;
             border: 1px solid #ccc;
             position: fixed;
-            bottom: 20px; /* 调整底部距离 */
+            bottom: 80px; /* 调整底部距离，为 AI 输入框留出空间 */
             left: 50%;
             transform: translateX(-50%);
             max-height: 200px;
@@ -32,52 +32,61 @@
           #aiOutput > div.assistant {
             background-color: #f0f0f0;
           }
-          #aiForm {
-            position: relative;
-            width: 500px;
+         #aiForm {
+              position: relative;
+              width: 500px;
               height: 40px;
               /* 盒子居中 */
-            top: 50%;
-            margin-top: -20px;
-            left: 50%;
-            margin-left: -250px;
+             top: 50%;
+             margin-top: -20px;
+              left: 50%;
+              margin-left: -250px;
             /* 圆角属性，可以根据自己的喜好调节，50%盒子就是个圆形 */
-            border-radius: 20px;
-           /* 两个阴影属性，做出凸起的效果。 */
-           /* 第一个阴影为白色，向左和上移动。 */
+              border-radius: 20px;
+            /* 两个阴影属性，做出凸起的效果。 */
+            /* 第一个阴影为白色，向左和上移动。 */
            /* 第二个阴影为黑色，向右和下移动。 */
-           /* 参数分别为：x方向偏移 y方向偏移 阴影模糊半径 颜色 */
-           box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.2),
-            -12px -12px 20px rgba(255, 255, 255, 1);
-                display: flex;
-                align-items: center;
+             /* 参数分别为：x方向偏移 y方向偏移 阴影模糊半径 颜色 */
+              box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.2),
+              -12px -12px 20px rgba(255, 255, 255, 1);
+              display: flex;
+              align-items: center;
+              position: fixed; /* 固定定位 */
+              bottom: 20px;
+              left: 50%;
+              transform: translateX(-50%);
           }
           #aiForm input[type="text"] {
-                width: 90%;
+              width: 90%;
                 height: inherit;
                 margin-left: 20px;
-               background-color: inherit;
+                background-color: inherit;
                /* outline用来清除点击搜索框的时候出现一个黑色小边框 */
-               outline: none;
+                outline: none;
+            }
+            #aiForm input[type="submit"] {
+                /* 把确认按钮变成黑色边框小圆圈 */
+                width: 5%;
+                height: 20px;
+                width: 20px;
+                background-color: white;
+                position: absolute;
+               right: 10;
+               top: 50%;
+                margin-top: -10px;
+                border-radius: 50%;
+                border-color: black;
+                border-width: thick;
+                border-style: solid;
+                outline: none;
+                 cursor: pointer;
           }
-          #aiForm input[type="submit"] {
-             /* 把确认按钮变成黑色边框小圆圈 */
-            width: 5%;
-            height: 20px;
-            width: 20px;
-            background-color: white;
-            position: absolute;
-            right: 10;
-            top: 50%;
-            margin-top: -10px;
-            border-radius: 50%;
-            border-color: black;
-            border-width: thick;
-            border-style: solid;
-            outline: none;
-            cursor: pointer;
-        }
-        
+           .setButtonBox {
+               /* background-color: red; */
+                position: fixed;
+                right: 100px;
+               bottom: 120px;  /* 将底部按钮位置提高，避免重叠 */
+            }
     </style>
        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   </head>
@@ -95,12 +104,10 @@
           </form>
         </div>
         <!-- AI输入框 -->
-        <div id="backgroundFormStyle">
-             <form id="aiForm">
+          <form id="aiForm">
                 <input type="text" placeholder="AI输入框" id="aiInput" autocomplete="off"/>
                  <input type="submit" value="" id="aiSubmitButton" />
              </form>
-        </div>
 
 
         <div class="iconBackBoxAll">
