@@ -1,6 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN" dir="ltr">
-  <head>
+<head>
     <meta charset="utf-8">
     <title>快捷启动页</title>
     <link rel="stylesheet" href="beginPageCss1.css" type="text/css">
@@ -14,86 +15,95 @@
             
         }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="backgroundBox1">
-      <div class="backgroundBox2">
-        <!-- backgroundFormStyle盒子里面放的是整个搜索框 -->
-        <!-- 这里使用Bing搜索引擎。 -->
-        <div id="backgroundFormStyle">
-          <form action="https://www.bing.com/search" method="get" target="_parent" id="searchForm">
-            <input type="hidden" name="hiddenInput" value="3"/>
-            <input type="text" name="q" placeholder="搜索框" id="searchInput" autocomplete="off"/>
-            <input type="submit" value="" id="confirmInput"/>
-            <!-- 确定按钮简化为一个小圆圈。 -->
-          </form>
-        </div>
-        <!-- AI输入框 -->
-        <div id="backgroundFormStyle" style="margin-top: 20px;">
-            <input type="text" placeholder="AI输入框" id="aiInput" autocomplete="off"/>
-            <button type="button" id="aiSubmitButton" style="display: inline-block; width: 20px; height: 20px; margin-left: 5px; border: none; background: #fff; border-radius: 50%; cursor: pointer;"></button>
-        </div>
-        <div id="aiOutput" style="margin-top: 10px; white-space: pre-wrap;"></div>
+        <div class="backgroundBox2">
+            <!-- backgroundFormStyle盒子里面放的是整个搜索框 -->
+            <!-- 这里使用Bing搜索引擎。 -->
+            <div id="backgroundFormStyle">
+                <form action="https://www.bing.com/search" method="get" target="_parent" id="searchForm">
+                    <input type="hidden" name="hiddenInput" value="3"/>
+                    <input type="text" name="q" placeholder="搜索框" id="searchInput" autocomplete="off"/>
+                    <input type="submit" value="" id="confirmInput"/>
+                    <!-- 确定按钮简化为一个小圆圈。 -->
+                </form>
+            </div>
+            <!-- AI输入框 -->
+            <div id="backgroundFormStyle" style="margin-top: 20px;">
+                <input type="text" placeholder="AI输入框" id="aiInput" autocomplete="off"/>
+                <button type="button" id="aiSubmitButton" style="display: inline-block; width: 20px; height: 20px; margin-left: 5px; border: none; background: #fff; border-radius: 50%; cursor: pointer;"></button>
+            </div>
+            <div id="aiOutput" style="margin-top: 10px; white-space: pre-wrap;"></div>
 
-        <div class="iconBackBoxAll">
-          <!-- 每一个网站入口包含两个信息，图片和名称。 -->
-          <!-- 在href中填写网站的地址，p标签中填写名字。 -->
-          <!-- 不涉及JavaScript的话，建议使用a标签实现链接。 -->
-          <a class="iconBackBox" href="http://oi.nks.edu.cn:19360/">
-            <img src="img/nkoj.png" alt="">
-            <!-- src是图片的地址，alt是图片无法显示时的文字 -->
-            <div>
-              <p>NKOJ</p>
+            <div class="iconBackBoxAll">
+                <!-- 每一个网站入口包含两个信息，图片和名称。 -->
+                <!-- 在href中填写网站的地址，p标签中填写名字。 -->
+                <!-- 不涉及JavaScript的话，建议使用a标签实现链接。 -->
+                <a class="iconBackBox" href="http://oi.nks.edu.cn:19360/">
+                    <img src="img/nkoj.png" alt="">
+                    <!-- src是图片的地址，alt是图片无法显示时的文字 -->
+                    <div>
+                        <p>NKOJ</p>
+                    </div>
+                </a>
+                <a class="iconBackBox" href="https://vjudge.net/">
+                    <img src="https://vjudge.net/favicon.ico" alt="">
+                    <!-- src是图片的地址，alt是图片无法显示时的文字 -->
+                    <div>
+                        <p>vjudge</p>
+                    </div>
+                </a>
+                <a class="iconBackBox" href="https://luogu.com.cn/">
+                    <img src="https://luogu.com.cn/favicon.ico" alt="">
+                    <!-- src是图片的地址，alt是图片无法显示时的文字 -->
+                    <div>
+                        <p>洛谷</p>
+                    </div>
+                </a>
+                <a class="iconBackBox" href="https://baidu.com/">
+                    <img src="https://www.baidu.com/favicon.ico" alt="">
+                    <!-- src是图片的地址，alt是图片无法显示时的文字 -->
+                    <div>
+                        <p>百度</p>
+                    </div>
+                </a>
+                <a class="iconBackBox" href="https://metaso.cn/">
+                    <img src="https://metaso.cn/favicon.ico" alt="">
+                    <!-- src是图片的地址，alt是图片无法显示时的文字 -->
+                    <div>
+                        <p>秘塔AI搜索</p>
+                    </div>
+                </a>
+                <a class="iconBackBox" href="https://tongyi.aliyun.com/">
+                    <img src="https://img.alicdn.com/imgextra/i1/O1CN01AKUdEM1qP6BQVaYhT_!!6000000005487-2-tps-512-512.png" alt="">
+                    <!-- src是图片的地址，alt是图片无法显示时的文字 -->
+                    <div>
+                        <p>通义千问</p>
+                    </div>
+                </a>
             </div>
-          </a>
-          <a class="iconBackBox" href="https://vjudge.net/">
-            <img src="https://vjudge.net/favicon.ico" alt="">
-            <!-- src是图片的地址，alt是图片无法显示时的文字 -->
-            <div>
-              <p>vjudge</p>
-            </div>
-          </a>
-          <a class="iconBackBox" href="https://luogu.com.cn/">
-            <img src="https://luogu.com.cn/favicon.ico" alt="">
-            <!-- src是图片的地址，alt是图片无法显示时的文字 -->
-            <div>
-              <p>洛谷</p>
-            </div>
-          </a>
-          <a class="iconBackBox" href="https://baidu.com/">
-            <img src="https://www.baidu.com/favicon.ico" alt="">
-            <!-- src是图片的地址，alt是图片无法显示时的文字 -->
-            <div>
-              <p>百度</p>
-            </div>
-          </a>
-          <a class="iconBackBox" href="https://metaso.cn/">
-            <img src="https://metaso.cn/favicon.ico" alt="">
-            <!-- src是图片的地址，alt是图片无法显示时的文字 -->
-            <div>
-              <p>秘塔AI搜索</p>
-            </div>
-          </a>
-          <a class="iconBackBox" href="https://tongyi.aliyun.com/">
-            <img src="https://img.alicdn.com/imgextra/i1/O1CN01AKUdEM1qP6BQVaYhT_!!6000000005487-2-tps-512-512.png" alt="">
-            <!-- src是图片的地址，alt是图片无法显示时的文字 -->
-            <div>
-              <p>通义千问</p>
-            </div>
-          </a>
         </div>
-      </div>
     </div>
     <!-- 下面是添加和删除的按钮，这里暂未实现功能，先放这里配个像。不想要可以删除 -->
     <!-- <div class="setButtonBox">
-      <button type="button" name="button" autocomplete="off" id="addBut"></button>
-      <button type="button" name="button" autocomplete="off" id="deleteBut"></button>
+        <button type="button" name="button" autocomplete="off" id="addBut"></button>
+        <button type="button" name="button" autocomplete="off" id="deleteBut"></button>
     </div> -->
     <script>
         const aiInput = document.getElementById('aiInput');
         const aiOutput = document.getElementById('aiOutput');
         const aiSubmitButton = document.getElementById('aiSubmitButton');
 
+        let conversationHistory = [];  // 定义对话历史数组
+         function  displayMessages() {
+          aiOutput.innerHTML = '';
+          conversationHistory.forEach(message => {
+             const messageDiv = document.createElement('div');
+             messageDiv.textContent = `${message.role === 'user' ? '用户' : 'AI'}: ${message.content}`;
+              aiOutput.appendChild(messageDiv);
+           });
+         }
         aiSubmitButton.addEventListener('click', async function() {
             const input = aiInput.value;
 
@@ -104,44 +114,36 @@
 
             try {
                aiOutput.innerText = "正在思考中......";
-               
-                // 方法一：使用 response.json() (推荐)
+
+                // 添加用户消息到历史记录
+                conversationHistory.push({ role: 'user', content: input });
+
                 const response = await fetch('https://hcz1017.pythonanywhere.com/chatapi', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ input: input, system_prompt: '请简洁明了的回答' }),
+                    body: JSON.stringify({ 
+                        input: input, 
+                        system_prompt: '请简洁明了的回答',
+                        history: conversationHistory
+                    }),
                 });
 
-                if (!response.ok) {
-                      const errorText = await response.text();
-                      aiOutput.innerText = `Error: ${response.status} - ${errorText}`;
-                      return;
-                 }
-                const data = await response.json();
-                aiOutput.innerText = data;
-
-
-               
-                 /*
-                 // 方法二：手动解析 JSON (不推荐)
-                const response = await fetch('https://hcz1017.pythonanywhere.com/chatapi', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ input: input, system_prompt: '请简洁明了的回答' }),
-                });
                  if (!response.ok) {
                     const errorText = await response.text();
-                   aiOutput.innerText = `Error: ${response.status} - ${errorText}`;
-                   return;
-                 }
-                const text = await response.text();
-                 const data = JSON.parse(text);
-                aiOutput.innerText = data;
-                */
+                    aiOutput.innerText = `Error: ${response.status} - ${errorText}`;
+                    return;
+                }
+
+
+                const aiResponse = await response.json();
+               // 添加 AI 回复到历史记录
+               conversationHistory.push({ role: 'assistant', content: aiResponse });
+
+                displayMessages();
+
+                aiInput.value = ''; // 清空输入框
             } catch (error) {
                  aiOutput.innerText = "请求出错, 请重试";
                 console.error('Error fetching AI response:', error);
@@ -154,5 +156,5 @@
             }
         });
     </script>
-  </body>
+</body>
 </html>
